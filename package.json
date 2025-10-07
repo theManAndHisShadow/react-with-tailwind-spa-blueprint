@@ -1,6 +1,6 @@
 {
   "name": "react-with-tailwind-spa-blueprint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Implementation of React single page application with Tailwind",
   "main": "index.js",
   "author": "https://github.com/theManAndHisShadow",
@@ -38,6 +38,7 @@
     "build:frontend": "webpack --config webpack.frontend.config.js --env development",
     "build:backend": "webpack --config webpack.backend.config.js --env development",
     "build": "npm run build:backend && npm run build:frontend",
-    "build:release": "npm run build && npm run bump-version"
+    "update-version": "node scripts/version_updater.js",
+    "build:release": "npm run build && npm run update-version"
   }
 }
