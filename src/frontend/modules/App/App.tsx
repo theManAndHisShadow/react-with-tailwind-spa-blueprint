@@ -1,8 +1,10 @@
 // App.tsx
+import '../../static/global.css';
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainPage from './pages/Main';
-import '../../static/global.css';
+import PageNotFound from './pages/404';
 
 
 const App = () => {
@@ -13,6 +15,7 @@ const App = () => {
           {/* aliases */}
           <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
+          <Route path="/*" element={<PageNotFound />}/>
         </Routes>
       </div>
     </Router>
