@@ -19,6 +19,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js']
   },
+  
+  devtool: 'source-map',
 
   output: {
     filename: 'js/backend.bundle.js',

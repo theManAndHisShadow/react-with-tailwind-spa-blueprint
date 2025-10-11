@@ -80,6 +80,8 @@ module.exports = {
     clean: true, 
   },
 
+  devtool: 'source-map',
+
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, './src/frontend/static/index.html'),
