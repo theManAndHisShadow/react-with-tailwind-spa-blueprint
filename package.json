@@ -25,6 +25,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
     "redux": "^5.0.1",
+    "rimraf": "^6.0.1",
     "style-loader": "^4.0.0",
     "tailwindcss": "^3.4.18",
     "ts-loader": "^9.5.2",
@@ -34,11 +35,17 @@
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
-    "server": "node build/backend/js/backend.bundle.js",
-    "build:frontend": "webpack --config webpack.frontend.config.js --env development",
-    "build:backend": "webpack --config webpack.backend.config.js --env development",
-    "build": "npm run build:backend && npm run build:frontend",
+    "clean:frontend": "rimraf build/frontend",
+    "clean:backend": "rimraf build/backend",
+    "clean": "rimraf build",
+    "build:frontend": "npm run clean:frontend && webpack --config webpack.frontend.config.js --env development",
+    "build:backend": "npm run clean:backend && webpack --config webpack.backend.config.js --env development",
+    "build": "npm run clean && npm run build:frontend && npm run build:backend",
+    "build:frontend:prod": "npm run clean:frontend && webpack --config webpack.frontend.config.js --env production",
+    "build:backend:prod": "npm run clean:backend && webpack --config webpack.backend.config.js --env production",
+    "build:prod": "npm run clean && npm run build:frontend:prod && npm run build:backend:prod ",
     "update-version": "node scripts/version_updater.js",
-    "build:release": "npm run build && npm run update-version"
+    "build:release": "npm run build:prod && npm run update-version",
+    "server": "node build/backend/js/backend.bundle.js"
   }
 }
