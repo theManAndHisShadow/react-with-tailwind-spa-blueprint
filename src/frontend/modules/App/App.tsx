@@ -10,6 +10,8 @@ const App = () => {
     <Router>
       <div className="min-h-screen bg-[#121212] text-white font-sans p-8">
         <Routes>
+          {/* aliases */}
+          <Route path="/" element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
         </Routes>
       </div>
