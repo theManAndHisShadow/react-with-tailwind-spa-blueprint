@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import "dotenv";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const __assets = path.join(__dirname, '../../assets');
@@ -30,6 +31,6 @@ app.get('/{*any}', (req, res) => {
   res.sendFile(path.join(__dirname, '../../build/frontend/index.html'));
 });
 
-app.listen(3000, () => {
+app.listen(process.env.APP_BACKEND_PORT, () => {
   console.log('Server started on http://localhost:3000');
 });

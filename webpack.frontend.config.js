@@ -1,5 +1,8 @@
+const dotenv = require('dotenv')
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 module.exports = {
   mode: 'development', 
@@ -37,9 +40,42 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
   },
+  
+  optimization: {
+    usedExports: true, 
+    sideEffects: true, 
+    minimize: true, 
 
-  output: {
-    filename: 'js/frontend.bundle.js',
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      cacheGroups: {
+        react: {
+          test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+          name: 'react-vendor',
+          chunks: 'all',
+          priority: 20,
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          priority: 10,
+        },
+      },
+    },
+    runtimeChunk: 'single',
+  },
+
+  performance: {
+    maxAssetSize: 2 * 1024 * 1024,
+    maxEntrypointSize: 2 * 1024 * 1024,
+    hints: 'warning'
+  },
+
+ output: {
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[name].[contenthash].js',
     path: path.resolve(__dirname, 'build/frontend/'),
     clean: true, 
   },
@@ -55,8 +91,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, './src/frontend/static'),
     },
+    open: true,
     compress: true,
-    port: 3000,
+    port: process.env.APP_FRONTEND_PORT || 3000,
     historyApiFallback: true, // to make React Router work without 404
   },
 };
