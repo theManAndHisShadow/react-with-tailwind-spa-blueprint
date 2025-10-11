@@ -13,7 +13,9 @@
     "@types/react-redux": "^7.1.34",
     "@types/redux": "^3.6.31",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.1",
     "css-loader": "^7.1.2",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "path-to-regexp": "^6.2.1",
@@ -32,6 +34,7 @@
     "typescript": "^5.8.3",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2",
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
@@ -46,6 +49,9 @@
     "build:prod": "npm run clean && npm run build:frontend:prod && npm run build:backend:prod ",
     "update-version": "node scripts/version_updater.js",
     "build:release": "npm run build:prod && npm run update-version",
-    "server": "node build/backend/js/backend.bundle.js"
+    "server": "webpack serve build/backend/js/backend.bundle.js",
+    "start:server": "node build/backend/js/backend.bundle.js",
+    "start:frontend": "webpack serve --config webpack.frontend.config.js --env development",
+    "app": "concurrently \"npm run start:server\" \"npm run start:frontend\""
   }
 }
