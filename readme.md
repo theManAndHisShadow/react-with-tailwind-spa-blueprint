@@ -16,7 +16,7 @@ npm run build:prod
 
 3. To compile a production build and increase the application version:
 ```zsh
-npm run build:realese
+npm run build:release
 ```
 
 5. If you want just run the app:
